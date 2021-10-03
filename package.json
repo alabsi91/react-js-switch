@@ -1,0 +1,26 @@
+{
+  "name": "react-js-switch",
+  "version": "1.0.0",
+  "description": "Switch is a visual toggle between two mutually exclusive states — on and off.",
+  "main": "react-js-switch.js",
+  "scripts": {
+    "publish": "npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alabsi91/react-js-switch.git"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "switch",
+    "toggle"
+  ],
+  "author": "Ahmed Alabsi",
+  "license": "ISC",
+  "types": "./react-js-switch.d.ts",
+  "bugs": {
+    "url": "https://github.com/alabsi91/react-js-switch/issues"
+  },
+  "homepage": "https://github.com/alabsi91/react-js-switch#readme"
+}
