@@ -2,6 +2,8 @@
 
 - Switch is a visual toggle between two mutually exclusive states — on and off.
 
+![](https://github.com/alabsi91/react-js-switch/blob/readme/react-switches.png)
+
 ## Installation
 
 `npm install react-js-switch`
