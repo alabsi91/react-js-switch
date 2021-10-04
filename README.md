@@ -10,8 +10,8 @@
 
 ## Usage
 
-```
-/...
+```javascript
+//...
 
 import Switch from 'react-js-switch'
 
@@ -21,19 +21,19 @@ export default function App() {
 
     const switch_onChange_handle = () => {
       setIsSwitchOn(!isSwitchOn)
-      /...
+      //...
     }
 
     return (
       <div>
-        /...
+        //...
 
           <Switch
            value={isSwitchOn}
            onChange={switch_onChange_handle}
           />
 
-        /...
+        //...
       </div>
     );
 }
