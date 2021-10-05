@@ -13,31 +13,24 @@
 ```javascript
 //...
 
-import Switch from 'react-js-switch'
+import Switch from 'react-js-switch';
 
 export default function App() {
+  const [isSwitchOn, setIsSwitchOn] = useState(true);
 
-    const [isSwitchOn, setIsSwitchOn] = useState(true)
+  const switch_onChange_handle = () => {
+    setIsSwitchOn(!isSwitchOn);
+    //...
+  };
 
-    const switch_onChange_handle = () => {
-      setIsSwitchOn(!isSwitchOn)
+  return (
+    <div>
       //...
-    }
-
-    return (
-      <div>
-        //...
-
-          <Switch
-           value={isSwitchOn}
-           onChange={switch_onChange_handle}
-          />
-
-        //...
-      </div>
-    );
+      <Switch value={isSwitchOn} onChange={switch_onChange_handle} />
+      //...
+    </div>
+  );
 }
-
 ```
 
 ## Props
