@@ -149,6 +149,8 @@ type NamedColor =
     | "yellow"
     | "yellowgreen";
 
+type requestFrameEasing = "linear" | "easeInSine" | "easeOutSine" | "easeInOutSine" | "easeInQuad" | "easeOutQuad" | "easeInOutQuad" | "easeInCubic" | "easeOutCubic" | "easeInOutCubic" | "easeInQuart" | "easeOutQuart" | "easeInOutQuart" | "easeInQuint" | "easeOutQuint" | "easeInOutQuint" | "easeInExpo" | "easeOutExpo" | "easeInOutExpo" | "easeInCirc" | "easeOutCirc" | "easeInOutCirc" | "easeInBack" | "easeOutBack" | "easeInOutBack" | "easeInElastic" | "easeOutElastic" | "easeInOutElastic" | "easeInBounce" | "easeOutBounce" | "easeInOutBounce";
+
 interface backgroundColor {
     /**
      * Switch container background color when it's on.
@@ -179,54 +181,63 @@ interface borderColor {
 
 interface SwitchProps {
     /**
-     * The size of the switch in pixels.
+     * - The size of the switch in pixels.
+     * 
      * **Default Value** 40
      */
     size?: number
 
     /**
-     * Switch On/Off animation duration in ms.
-     * **Default Value** 250
+     * - Switch On/Off animation duration in ms.
+     * 
+     * - **Default Value** 250
      */
     duration?: number
 
     /**
-     * Switch On/Off animation timing function.
-     * **Default Value** ease
+     * - Switch On/Off animation timing function.
+     * 
+     * - Easing functions specify the rate of change of the number over time.
+     * 
+     * - **Default Value** 'easeOutExpo'
      */
-    ease?: 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'linear' | 'cubic-bezier(0, 0, 0, 0)';
+    ease?: requestFrameEasing | Function;
 
     /**
-     * Custom color for switch circle button.
-     * **Default Value** '#fff'
+     * - Custom color for switch circle button.
+     * 
+     * - **Default Value** '#fff'
      */
     color?: NamedColor;
 
     /**
-     * Switch container background color when it's on or off.
-     * **Default Value** { on: '#fc3f7f', off: '#f9f9f9' }
+     * - Switch container background color when it's on or off.
+     * 
+     * - **Default Value** { on: '#fc3f7f', off: '#f9f9f9' }
      */
     backgroundColor?: backgroundColor;
 
     /**
-     * Switch container border color when it's on or off.
-     * **Default Value** { on: '#fc3f7f', off: '#e6e6e6' }
+     * - Switch container border color when it's on or off.
+     * 
+     * - **Default Value** { on: '#fc3f7f', off: '#e6e6e6' }
      */
     borderColor?: borderColor;
 
     /**
-     * Value of the switch, true means 'on', false means 'off'.
+     * - Value of the switch, true means 'on', false means 'off'.
      */
     value?: boolean;
 
     /**
-     * Disable toggling the switch.
-     * **Default Value** false
+     * - Disable toggling the switch.
+     * 
+     * - **Default Value** false
      */
     disabled?: boolean;
 
     /**
-     * Callback called with the new value when it changes takes a parameter represents switch state.
+     * - Callback called with the new value when it changes takes a parameter represents switch state.
      */
     onChange: Function;
 }
