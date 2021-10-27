@@ -25,14 +25,32 @@ function Switch(props) {
   const duration = (_props$duration = props.duration) !== null && _props$duration !== void 0 ? _props$duration : 250;
   const easingFunction = props.ease || 'easeOutExpo';
   const color = props.color || '#fff';
+  const backgroundColorOn = ((_props$backgroundColo = props.backgroundColor) === null || _props$backgroundColo === void 0 ? void 0 : _props$backgroundColo.on) || '#fc3f7f';
+  const backgroundColorOff = ((_props$backgroundColo2 = props.backgroundColor) === null || _props$backgroundColo2 === void 0 ? void 0 : _props$backgroundColo2.off) || '#f9f9f9';
   const background_color = {
-    on: ((_props$backgroundColo = props.backgroundColor) === null || _props$backgroundColo === void 0 ? void 0 : _props$backgroundColo.on) || '#fc3f7f',
-    off: ((_props$backgroundColo2 = props.backgroundColor) === null || _props$backgroundColo2 === void 0 ? void 0 : _props$backgroundColo2.off) || '#f9f9f9'
+    on: backgroundColorOn,
+    off: backgroundColorOff
   };
+  const borderColorOn = ((_props$borderColor = props.borderColor) === null || _props$borderColor === void 0 ? void 0 : _props$borderColor.on) || '#fc3f7f';
+  const borderColorOff = ((_props$borderColor2 = props.borderColor) === null || _props$borderColor2 === void 0 ? void 0 : _props$borderColor2.off) || '#e6e6e6';
   const border_color = {
-    on: ((_props$borderColor = props.borderColor) === null || _props$borderColor === void 0 ? void 0 : _props$borderColor.on) || '#fc3f7f',
-    off: ((_props$borderColor2 = props.borderColor) === null || _props$borderColor2 === void 0 ? void 0 : _props$borderColor2.off) || '#e6e6e6'
+    on: borderColorOn,
+    off: borderColorOff
   };
+
+  const checkTypes = () => {
+    if (typeof disabled !== 'boolean') console.error('react-js-switch: props.disabled has invalid value.');
+    if (typeof width !== 'number' || width < 0) console.error('react-js-switch: props.size has invalid value.');
+    if (typeof duration !== 'number' || duration < 0) console.error('react-js-switch: props.duration has invalid value.');
+    if (!new Set(['linear', 'easeInSine', 'easeOutSine', 'easeInOutSine', 'easeInQuad', 'easeOutQuad', 'easeInOutQuad', 'easeInCubic', 'easeOutCubic', 'easeInOutCubic', 'easeInQuart', 'easeOutQuart', 'easeInOutQuart', 'easeInQuint', 'easeOutQuint', 'easeInOutQuint', 'easeInExpo', 'easeOutExpo', 'easeInOutExpo', 'easeInCirc', 'easeOutCirc', 'easeInOutCirc', 'easeInBack', 'easeOutBack', 'easeInOutBack', 'easeInElastic', 'easeOutElastic', 'easeInOutElastic', 'easeInBounce', 'easeOutBounce', 'easeInOutBounce']).has(easingFunction) && typeof easingFunction === 'string' || typeof easingFunction !== 'string' && typeof easingFunction !== 'function') console.error('react-js-switch: props.ease has invalid value.');
+    if (typeof color !== 'string') console.error('react-js-switch: props.color has invalid value.');
+    if (typeof backgroundColorOn !== 'string') console.error('react-js-switch: props.backgroundColor.on has invalid value.');
+    if (typeof backgroundColorOff !== 'string') console.error('react-js-switch: props.backgroundColor.off has invalid value.');
+    if (typeof borderColorOn !== 'string') console.error('react-js-switch: props.borderColor.on has invalid value.');
+    if (typeof borderColorOff !== 'string') console.error('react-js-switch: props.borderColor.off has invalid value.');
+  };
+
+  checkTypes();
   const expand_handle_by = width / 2 / 4;
   const [isOn, setIsOn] = (0, _react.useState)((_props$value = props.value) !== null && _props$value !== void 0 ? _props$value : false);
 

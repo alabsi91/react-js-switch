@@ -1,6 +1,6 @@
 {
   "name": "react-js-switch",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Switch is a visual toggle between two mutually exclusive states — on and off.",
   "main": "react-js-switch.js",
   "scripts": {
