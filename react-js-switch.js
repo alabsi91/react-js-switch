@@ -10,14 +10,76 @@ export default function Switch(props) {
   const duration = props.duration ?? 250;
   const easingFunction = props.ease || 'easeOutExpo';
   const color = props.color || '#fff';
+
+  const backgroundColorOn = props.backgroundColor?.on || '#fc3f7f';
+  const backgroundColorOff = props.backgroundColor?.off || '#f9f9f9';
   const background_color = {
-    on: props.backgroundColor?.on || '#fc3f7f',
-    off: props.backgroundColor?.off || '#f9f9f9',
+    on: backgroundColorOn,
+    off: backgroundColorOff,
   };
+
+  const borderColorOn = props.borderColor?.on || '#fc3f7f';
+  const borderColorOff = props.borderColor?.off || '#e6e6e6';
   const border_color = {
-    on: props.borderColor?.on || '#fc3f7f',
-    off: props.borderColor?.off || '#e6e6e6',
+    on: borderColorOn,
+    off: borderColorOff,
   };
+
+  const checkTypes = () => {
+    if (typeof disabled !== 'boolean') console.error('react-js-switch: props.disabled has invalid value.');
+
+    if (typeof width !== 'number' || width < 0) console.error('react-js-switch: props.size has invalid value.');
+
+    if (typeof duration !== 'number' || duration < 0) console.error('react-js-switch: props.duration has invalid value.');
+
+    if (
+      (!new Set([
+        'linear',
+        'easeInSine',
+        'easeOutSine',
+        'easeInOutSine',
+        'easeInQuad',
+        'easeOutQuad',
+        'easeInOutQuad',
+        'easeInCubic',
+        'easeOutCubic',
+        'easeInOutCubic',
+        'easeInQuart',
+        'easeOutQuart',
+        'easeInOutQuart',
+        'easeInQuint',
+        'easeOutQuint',
+        'easeInOutQuint',
+        'easeInExpo',
+        'easeOutExpo',
+        'easeInOutExpo',
+        'easeInCirc',
+        'easeOutCirc',
+        'easeInOutCirc',
+        'easeInBack',
+        'easeOutBack',
+        'easeInOutBack',
+        'easeInElastic',
+        'easeOutElastic',
+        'easeInOutElastic',
+        'easeInBounce',
+        'easeOutBounce',
+        'easeInOutBounce',
+      ]).has(easingFunction) &&
+        typeof easingFunction === 'string') ||
+      (typeof easingFunction !== 'string' && typeof easingFunction !== 'function')
+    )
+      console.error('react-js-switch: props.ease has invalid value.');
+
+    if (typeof color !== 'string') console.error('react-js-switch: props.color has invalid value.');
+
+    if (typeof backgroundColorOn !== 'string') console.error('react-js-switch: props.backgroundColor.on has invalid value.');
+    if (typeof backgroundColorOff !== 'string') console.error('react-js-switch: props.backgroundColor.off has invalid value.');
+
+    if (typeof borderColorOn !== 'string') console.error('react-js-switch: props.borderColor.on has invalid value.');
+    if (typeof borderColorOff !== 'string') console.error('react-js-switch: props.borderColor.off has invalid value.');
+  };
+  checkTypes();
 
   const expand_handle_by = width / 2 / 4;
 
