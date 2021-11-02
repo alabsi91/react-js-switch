@@ -65,21 +65,23 @@ function Switch(props) {
   const [isOn, setIsOn] = (0, _react.useState)((_props$value = props.value) !== null && _props$value !== void 0 ? _props$value : initialValue);
 
   const click_handle = () => {
-    var _props$value2, _props$onChange, _props$value3, _props$value4;
+    var _props$onChange2;
 
-    console.log(props.value, isOn, initialValue);
-    if (props.value === isOn) return;
-    setIsOn((_props$value2 = props.value) !== null && _props$value2 !== void 0 ? _props$value2 : !isOn);
-    (_props$onChange = props.onChange) === null || _props$onChange === void 0 ? void 0 : _props$onChange.call(props, !isOn);
-    const handleWidth = width / 2;
+    if (typeof props.value === 'boolean') {
+      var _props$onChange;
+
+      (_props$onChange = props.onChange) === null || _props$onChange === void 0 ? void 0 : _props$onChange.call(props, null);
+      return;
+    }
+
+    (_props$onChange2 = props.onChange) === null || _props$onChange2 === void 0 ? void 0 : _props$onChange2.call(props, !isOn);
+    setIsOn(!isOn);
     (0, _requestAnimationNumber.requestNum)({
-      from: ((_props$value3 = props.value) !== null && _props$value3 !== void 0 ? _props$value3 : isOn) ? handleWidth - expand_handle_by : 0,
-      to: ((_props$value4 = props.value) !== null && _props$value4 !== void 0 ? _props$value4 : isOn) ? 0 : handleWidth,
+      from: !isOn ? 0 : width / 2 - expand_handle_by,
+      to: !isOn ? width / 2 : 0,
       duration,
       easingFunction
-    }, (p, x) => {
-      handle.current.style.left = p + 'px';
-    });
+    }, p => handle.current.style.left = p + 'px');
   };
 
   const handle_animation_mousDown = () => {
@@ -115,7 +117,16 @@ function Switch(props) {
   };
 
   (0, _react.useEffect)(() => {
-    if (typeof props.value === 'boolean') setIsOn(props.value);
+    if (typeof props.value === 'boolean' && props.value !== isOn) {
+      setIsOn(props.value);
+      (0, _requestAnimationNumber.requestNum)({
+        from: props.value ? 0 : width / 2 - expand_handle_by,
+        to: props.value ? width / 2 : 0,
+        duration,
+        easingFunction
+      }, p => handle.current.style.left = p + 'px');
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [props.value]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     onClick: disabled ? null : click_handle,
@@ -140,7 +151,7 @@ function Switch(props) {
     ref: handle,
     style: {
       position: 'absolute',
-      left: isOn ? width / 2 : '0px',
+      left: isOn ? width / 2 + 'px' : '0px',
       width: width / 2 + 'px',
       height: height + 'px',
       borderRadius: width / 4 + 'px',
