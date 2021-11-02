@@ -88,4 +88,5 @@ function easeInQuad(x) {
 
 ### onChange : _[ (state: Boolean) => void ] [optional]_
 
-- Callback called with the new value when it changes takes a parameter represents switch state.
+- Callback called with the new value when it changes.
+- Takes a parameter represents switch state, this parameter will return `null` if the switch `value` linked to a state.

@@ -110,22 +110,22 @@ export default function Switch(props) {
   const [isOn, setIsOn] = useState(props.value ?? initialValue);
 
   const click_handle = () => {
-    console.log(props.value, isOn, initialValue);
-    if (props.value === isOn) return;
-    setIsOn(props.value ?? !isOn);
-    props.onChange?.(!isOn);
+    if (typeof props.value === 'boolean') {
+      props.onChange?.(null);
+      return;
+    }
 
-    const handleWidth = width / 2;
+    props.onChange?.(!isOn);
+    setIsOn(!isOn);
+
     requestNum(
       {
-        from: props.value ?? isOn ? handleWidth - expand_handle_by : 0,
-        to: props.value ?? isOn ? 0 : handleWidth,
+        from: !isOn ? 0 : width / 2 - expand_handle_by,
+        to: !isOn ? width / 2 : 0,
         duration,
         easingFunction,
       },
-      (p, x) => {
-        handle.current.style.left = p + 'px';
-      }
+      p => (handle.current.style.left = p + 'px')
     );
   };
 
@@ -168,7 +168,19 @@ export default function Switch(props) {
   };
 
   useEffect(() => {
-    if (typeof props.value === 'boolean') setIsOn(props.value);
+    if (typeof props.value === 'boolean' && props.value !== isOn) {
+      setIsOn(props.value);
+      requestNum(
+        {
+          from: props.value ? 0 : width / 2 - expand_handle_by,
+          to: props.value ? width / 2 : 0,
+          duration,
+          easingFunction,
+        },
+        p => (handle.current.style.left = p + 'px')
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.value]);
 
   return (
@@ -197,7 +209,7 @@ export default function Switch(props) {
           ref={handle}
           style={{
             position: 'absolute',
-            left: isOn ? width / 2 : '0px',
+            left: isOn ? width / 2 + 'px' : '0px',
             width: width / 2 + 'px',
             height: height + 'px',
             borderRadius: width / 4 + 'px',
