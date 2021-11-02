@@ -99,7 +99,7 @@ export default function Switch(props) {
     ]);
     for (const key in props) {
       if (Object.hasOwnProperty.call(props, key)) {
-        if (!allProps.has(key)) console.error(`react-js-pager: can't recognize props.${key} it's not a valid prop.`);
+        if (!allProps.has(key)) console.error(`react-js-switch: can't recognize props.${key} it's not a valid prop.`);
       }
     }
   };
