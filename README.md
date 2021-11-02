@@ -35,9 +35,13 @@ export default function App() {
 
 ## Props
 
-### value : _[Boolean]_
+### value : _[Boolean] [optional]_
 
 - Value of the switch, `true` means 'on', `false` means 'off'.
+### initialValue : _[Boolean] [optional]_
+
+- Value of the switch on the first render, true means 'on', false means 'off'.
+- **Note:** this prop will be overwritten by the `value` prop.
 
 ### size : _[Number] [optional]_
 
@@ -52,10 +56,8 @@ export default function App() {
 ### ease : _[String] [optional]_
 
 - Switch On/Off animation timing function.
-- Easing functions specify the rate of change of the number over time.
+- Check [easings.net](https://easings.net/) to learn more.
 - **Default Value** `easeOutExpo`
-- Avaliable Easing functions :
-  `"linear", "easeInSine", "easeOutSine", "easeInOutSine", "easeInQuad", "easeOutQuad", "easeInOutQuad", "easeInCubic", "easeOutCubic", "easeInOutCubic", "easeInQuart", "easeOutQuart", "easeInOutQuart", "easeInQuint", "easeOutQuint", "easeInOutQuint", "easeInExpo", "easeOutExpo", "easeInOutExpo", "easeInCirc", "easeOutCirc", "easeInOutCirc", "easeInBack", "easeOutBack", "easeInOutBack", "easeInElastic", "easeOutElastic", "easeInOutElastic", "easeInBounce", "easeOutBounce", "easeInOutBounce"`
 - If you want to provide your own timing-function make sure that the function takes one parameter and returns one value.
 
 ```javascript

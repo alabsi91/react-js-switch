@@ -16,10 +16,11 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function Switch(props) {
-  var _props$disabled, _props$size, _props$duration, _props$backgroundColo, _props$backgroundColo2, _props$borderColor, _props$borderColor2, _props$value;
+  var _props$disabled, _props$initialValue, _props$size, _props$duration, _props$backgroundColo, _props$backgroundColo2, _props$borderColor, _props$borderColor2, _props$value;
 
   let handle = (0, _react.useRef)();
   const disabled = (_props$disabled = props.disabled) !== null && _props$disabled !== void 0 ? _props$disabled : false;
+  const initialValue = (_props$initialValue = props.initialValue) !== null && _props$initialValue !== void 0 ? _props$initialValue : false;
   const width = (_props$size = props.size) !== null && _props$size !== void 0 ? _props$size : 40;
   const height = width / 2;
   const duration = (_props$duration = props.duration) !== null && _props$duration !== void 0 ? _props$duration : 250;
@@ -40,6 +41,7 @@ function Switch(props) {
 
   const checkTypes = () => {
     if (typeof disabled !== 'boolean') console.error('react-js-switch: props.disabled has invalid value.');
+    if (typeof initialValue !== 'boolean') console.error('react-js-switch: props.initialValue has invalid value.');
     if (typeof width !== 'number' || width < 0) console.error('react-js-switch: props.size has invalid value.');
     if (typeof duration !== 'number' || duration < 0) console.error('react-js-switch: props.duration has invalid value.');
     if (!new Set(['linear', 'easeInSine', 'easeOutSine', 'easeInOutSine', 'easeInQuad', 'easeOutQuad', 'easeInOutQuad', 'easeInCubic', 'easeOutCubic', 'easeInOutCubic', 'easeInQuart', 'easeOutQuart', 'easeInOutQuart', 'easeInQuint', 'easeOutQuint', 'easeInOutQuint', 'easeInExpo', 'easeOutExpo', 'easeInOutExpo', 'easeInCirc', 'easeOutCirc', 'easeInOutCirc', 'easeInBack', 'easeOutBack', 'easeInOutBack', 'easeInElastic', 'easeOutElastic', 'easeInOutElastic', 'easeInBounce', 'easeOutBounce', 'easeInOutBounce']).has(easingFunction) && typeof easingFunction === 'string' || typeof easingFunction !== 'string' && typeof easingFunction !== 'function') console.error('react-js-switch: props.ease has invalid value.');
@@ -48,21 +50,31 @@ function Switch(props) {
     if (typeof backgroundColorOff !== 'string') console.error('react-js-switch: props.backgroundColor.off has invalid value.');
     if (typeof borderColorOn !== 'string') console.error('react-js-switch: props.borderColor.on has invalid value.');
     if (typeof borderColorOff !== 'string') console.error('react-js-switch: props.borderColor.off has invalid value.');
+    if (props.onChange && typeof props.onChange !== 'function') console.error('react-js-switch: props.onChange has invalid value.');
+    const allProps = new Set(['disabled', 'initialValue', 'value', 'size', 'duration', 'ease', 'color', 'backgroundColor', 'borderColor', 'onChange']);
+
+    for (const key in props) {
+      if (Object.hasOwnProperty.call(props, key)) {
+        if (!allProps.has(key)) console.error("react-js-pager: can't recognize props.".concat(key, " it's not a valid prop."));
+      }
+    }
   };
 
   checkTypes();
   const expand_handle_by = width / 2 / 4;
-  const [isOn, setIsOn] = (0, _react.useState)((_props$value = props.value) !== null && _props$value !== void 0 ? _props$value : false);
+  const [isOn, setIsOn] = (0, _react.useState)((_props$value = props.value) !== null && _props$value !== void 0 ? _props$value : initialValue);
 
   const click_handle = () => {
-    var _props$value2, _props$onChange;
+    var _props$value2, _props$onChange, _props$value3, _props$value4;
 
+    console.log(props.value, isOn, initialValue);
+    if (props.value === isOn) return;
     setIsOn((_props$value2 = props.value) !== null && _props$value2 !== void 0 ? _props$value2 : !isOn);
     (_props$onChange = props.onChange) === null || _props$onChange === void 0 ? void 0 : _props$onChange.call(props, !isOn);
     const handleWidth = width / 2;
     (0, _requestAnimationNumber.requestNum)({
-      from: isOn ? handleWidth - expand_handle_by : 0,
-      to: isOn ? 0 : handleWidth,
+      from: ((_props$value3 = props.value) !== null && _props$value3 !== void 0 ? _props$value3 : isOn) ? handleWidth - expand_handle_by : 0,
+      to: ((_props$value4 = props.value) !== null && _props$value4 !== void 0 ? _props$value4 : isOn) ? 0 : handleWidth,
       duration,
       easingFunction
     }, (p, x) => {
@@ -103,7 +115,7 @@ function Switch(props) {
   };
 
   (0, _react.useEffect)(() => {
-    setIsOn(props.value);
+    if (typeof props.value === 'boolean') setIsOn(props.value);
   }, [props.value]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     onClick: disabled ? null : click_handle,
@@ -115,7 +127,7 @@ function Switch(props) {
       position: 'relative',
       width: width + 'px',
       height: height + 'px',
-      border: 'solid ' + 2 + 'px' + (isOn ? border_color.on : border_color.off),
+      border: 'solid ' + 2 + 'px ' + (isOn ? border_color.on : border_color.off),
       borderRadius: height + 'px',
       backgroundColor: isOn ? background_color.on : background_color.off,
       cursor: 'pointer',
