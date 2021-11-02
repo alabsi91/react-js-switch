@@ -5,6 +5,7 @@ export default function Switch(props) {
   let handle = useRef();
 
   const disabled = props.disabled ?? false;
+  const initialValue = props.initialValue ?? false;
   const width = props.size ?? 40;
   const height = width / 2;
   const duration = props.duration ?? 250;
@@ -27,6 +28,8 @@ export default function Switch(props) {
 
   const checkTypes = () => {
     if (typeof disabled !== 'boolean') console.error('react-js-switch: props.disabled has invalid value.');
+
+    if (typeof initialValue !== 'boolean') console.error('react-js-switch: props.initialValue has invalid value.');
 
     if (typeof width !== 'number' || width < 0) console.error('react-js-switch: props.size has invalid value.');
 
@@ -78,20 +81,48 @@ export default function Switch(props) {
 
     if (typeof borderColorOn !== 'string') console.error('react-js-switch: props.borderColor.on has invalid value.');
     if (typeof borderColorOff !== 'string') console.error('react-js-switch: props.borderColor.off has invalid value.');
+
+    if (props.onChange && typeof props.onChange !== 'function')
+      console.error('react-js-switch: props.onChange has invalid value.');
+
+    const allProps = new Set([
+      'disabled',
+      'initialValue',
+      'value',
+      'size',
+      'duration',
+      'ease',
+      'color',
+      'backgroundColor',
+      'borderColor',
+      'onChange',
+    ]);
+    for (const key in props) {
+      if (Object.hasOwnProperty.call(props, key)) {
+        if (!allProps.has(key)) console.error(`react-js-pager: can't recognize props.${key} it's not a valid prop.`);
+      }
+    }
   };
   checkTypes();
 
   const expand_handle_by = width / 2 / 4;
 
-  const [isOn, setIsOn] = useState(props.value ?? false);
+  const [isOn, setIsOn] = useState(props.value ?? initialValue);
 
   const click_handle = () => {
+    console.log(props.value, isOn, initialValue);
+    if (props.value === isOn) return;
     setIsOn(props.value ?? !isOn);
     props.onChange?.(!isOn);
 
     const handleWidth = width / 2;
     requestNum(
-      { from: isOn ? handleWidth - expand_handle_by : 0, to: isOn ? 0 : handleWidth, duration, easingFunction },
+      {
+        from: props.value ?? isOn ? handleWidth - expand_handle_by : 0,
+        to: props.value ?? isOn ? 0 : handleWidth,
+        duration,
+        easingFunction,
+      },
       (p, x) => {
         handle.current.style.left = p + 'px';
       }
@@ -137,7 +168,7 @@ export default function Switch(props) {
   };
 
   useEffect(() => {
-    setIsOn(props.value);
+    if (typeof props.value === 'boolean') setIsOn(props.value);
   }, [props.value]);
 
   return (
@@ -152,7 +183,7 @@ export default function Switch(props) {
           position: 'relative',
           width: width + 'px',
           height: height + 'px',
-          border: 'solid ' + 2 + 'px' + (isOn ? border_color.on : border_color.off),
+          border: 'solid ' + 2 + 'px ' + (isOn ? border_color.on : border_color.off),
           borderRadius: height + 'px',
           backgroundColor: isOn ? background_color.on : background_color.off,
           cursor: 'pointer',

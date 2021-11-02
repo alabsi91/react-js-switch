@@ -230,6 +230,12 @@ interface SwitchProps {
     value?: boolean;
 
     /**
+     * - Value of the switch on the first render, true means 'on', false means 'off'.
+     * - **Note:** this prop will be overwritten by the `value` prop.
+     */
+    initialValue?: boolean;
+
+    /**
      * - Disable toggling the switch.
      * 
      * - **Default Value** false
