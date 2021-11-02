@@ -154,13 +154,13 @@ type requestFrameEasing = "linear" | "easeInSine" | "easeOutSine" | "easeInOutSi
 interface backgroundColor {
     /**
      * Switch container background color when it's on.
-     * **Default Value** #fc3f7f'
+     * **Default Value** `#fc3f7f`
      */
     on?: NamedColor
 
     /**
      * Switch container background color when it'soff.
-     * **Default Value** '#f9f9f9'
+     * **Default Value** `#f9f9f9`
      */
     off?: NamedColor
 }
@@ -168,13 +168,13 @@ interface backgroundColor {
 interface borderColor {
     /**
      * Switch container border color when it's on.
-     * **Default Value** #fc3f7f'
+     * **Default Value** `#fc3f7f`
      */
     on?: NamedColor
 
     /**
      * Switch container border color when it'soff.
-     * **Default Value** '#e6e6e6'
+     * **Default Value** `#e6e6e6`
      */
     off?: NamedColor
 }
@@ -182,63 +182,55 @@ interface borderColor {
 interface SwitchProps {
     /**
      * - The size of the switch in pixels.
-     * 
-     * **Default Value** 40
+     * **Default Value** `40`
      */
     size?: number
 
     /**
      * - Switch On/Off animation duration in ms.
-     * 
-     * - **Default Value** 250
+     * - **Default Value** `250`
      */
     duration?: number
 
     /**
      * - Switch On/Off animation timing function.
-     * 
-     * - Easing functions specify the rate of change of the number over time.
-     * 
-     * - **Default Value** 'easeOutExpo'
+     * - Check [easings.net](https://easings.net/) to learn more.
+     * - **Default Value** `easeOutExpo`
      */
     ease?: requestFrameEasing | Function;
 
     /**
      * - Custom color for switch circle button.
-     * 
-     * - **Default Value** '#fff'
+     * - **Default Value** `#fff`
      */
     color?: NamedColor;
 
     /**
      * - Switch container background color when it's on or off.
-     * 
-     * - **Default Value** { on: '#fc3f7f', off: '#f9f9f9' }
+     * - **Default Value** `{ on: '#fc3f7f', off: '#f9f9f9' }`
      */
     backgroundColor?: backgroundColor;
 
     /**
      * - Switch container border color when it's on or off.
-     * 
-     * - **Default Value** { on: '#fc3f7f', off: '#e6e6e6' }
+     * - **Default Value** `{ on: '#fc3f7f', off: '#e6e6e6' }`
      */
     borderColor?: borderColor;
 
     /**
-     * - Value of the switch, true means 'on', false means 'off'.
+     * - Value of the switch, true means `on`, false means `off`.
      */
     value?: boolean;
 
     /**
-     * - Value of the switch on the first render, true means 'on', false means 'off'.
+     * - Value of the switch on the first render, true means `on`, false means `off`.
      * - **Note:** this prop will be overwritten by the `value` prop.
      */
     initialValue?: boolean;
 
     /**
      * - Disable toggling the switch.
-     * 
-     * - **Default Value** false
+     * - **Default Value** `false`
      */
     disabled?: boolean;
 
