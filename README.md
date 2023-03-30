@@ -35,25 +35,26 @@ export default function App() {
 
 ## Props
 
-### value : _[Boolean] [optional]_
+### `value?: boolean`
 
 - Value of the switch, `true` means 'on', `false` means 'off'.
-### initialValue : _[Boolean] [optional]_
 
-- Value of the switch on the first render, true means 'on', false means 'off'.
+### `initialValue?: boolean`
+
+- Value of the switch on the first render, `true` means 'on', `false` means 'off'.
 - **Note:** this prop will be overwritten by the `value` prop.
 
-### size : _[Number] [optional]_
+### `size?: number`
 
 - The size of the switch in pixels.
 - **Default Value** `40`
 
-### duration : _[Number] [optional]_
+### `duration?: number`
 
 - Switch On/Off animation duration in ms.
 - **Default Value** `250`
 
-### ease : _[String] [optional]_
+### `ease?: string`
 
 - Switch On/Off animation timing function.
 - Check [easings.net](https://easings.net/) to learn more.
@@ -66,27 +67,27 @@ function easeInQuad(x) {
 }
 ```
 
-### color : _[String] [optional]_
+### `color?: string`
 
 - Custom color for switch circle button.
 - **Default Value** `#fff`
 
-### backgroundColor : _[String] [optional]_
+### `backgroundColor?: string`
 
 - Switch container background color when it's on or off.
 - **Default Value** `{ on: '#fc3f7f', off: '#f9f9f9' }`
 
-### borderColor : _[String] [optional]_
+### `borderColor?: string`
 
 - Switch container border color when it's on or off.
 - **Default Value** `{ on: '#fc3f7f', off: '#e6e6e6' }`
 
-### disabled : _[Boolean] [optional]_
+### `disabled?: boolean`
 
 - Disable toggling the switch.
 - **Default Value** `false`
 
-### onChange : _[ (state: Boolean) => void ] [optional]_
+### `onChange?: (state: Boolean) => void`
 
 - Callback called with the new value when it changes.
 - Takes a parameter represents switch state, this parameter will return `null` if the switch `value` linked to a state.
